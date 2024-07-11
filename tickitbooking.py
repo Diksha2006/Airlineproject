@@ -647,12 +647,20 @@ def booking():
     b_name.append(n)
     d=input("ENTER THE BIRTH_OF_DATE=")
     b_dob.append(d)
-    p=int(input("ENTER THE PASSPORT_NUMBER="))
-    if(len(p)>=12):
-        passportno.append(p)
-    c=int(input("ENTER THE BOOKING CONTACT_NUMBER="))
-    if(len(c)==10):
-        b_contactno.append(c)
+    p=(input("ENTER THE PASSPORT_NUMBER="))
+    if(len(p)<=12):
+        if(len(p)==12):
+          passportno.append(p)
+        else:
+          print("ENTER THE VALLID PASSPORT NUMBER (CONSISTS WITH 12 DIGITS....)")
+    c=(input("ENTER THE BOOKING CONTACT_NUMBER="))
+    if(len(c)<=10):
+
+        if(len(c)==10):
+             b_contactno.append(c)
+        else:
+             print("ENTER THE VALLID CONTACT NUMBER (CONSISTS WITH 10 DIGITS....)")
+
     e=input("ENTER THE EMAIL_ID=")
     b_email.append(e) 
     print("BOOKING ID=>",cnt)
