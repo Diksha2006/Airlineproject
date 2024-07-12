@@ -1,6 +1,6 @@
-print("\n 1. ECONOMICS CLASS \n 2.BUSINESS CLASS")
-ch=int(input("ENTER YOUR CHOICE =>"))
+import csv
 print("\n 1.FOOD MEAL \n 2.SOFT DRUNKS \n 3.DESSERT \n 4.SNACKS \n 5.SALAD")
+ch=int(input("ENTER YOUR CHOICE =>"))
 if(ch==1):
     print("\n 1.VEGETERAIN \n 2.NON-VEGETERAIN")
     c=int(input("ENTER YOUR CHOICE"))
@@ -17,5 +17,16 @@ if(ch==4):
 if(ch==5):
     print("\n 1.VEGETABLE SALAD \n 2.MEAT SALAD \n 3.FISH SALAD \n 4.GREEN SALAD \n 5.MIXED SALAD \n 6.FRUIT SALAD \n 7.MACARONI SALAD \n 8.LEAFY GREEN SALAD ")
 
-def bookmeal(b_id,b_name=None,b_dob=None,passportno=None,b_contactno=None,b_email=None):
-    id=int(input("ENTER YOUR TIKIT BOOKING ID =>"))
+def main_meal():
+    with open ("meal_main.csv",mode='r',newline='') as file:
+        reader = csv.DictReader(file)
+        return list(reader)
+a=main_meal()
+print(a)
+def sub_meal():
+    with open ("meal_sub.csv",mode='r',newline='')as file:
+        reader = csv.DictReader(file)
+        return list(reader)
+b=sub_meal()
+print(b)
+
