@@ -1,4 +1,4 @@
-from ticketbooking import booking,view,write_csv,search,search1,deletedata,updatedata,flighttype,counttickets
+from ticketbooking import booking,view,write_csv,search,search1,deletedata,updatedata,flighttype,counttickits
 from meal1 import main_meal,sub_meal,meals
 from application import write_csv,reader_csv,vview
 print("1.LOGIN AS ADMIN...\n 2.LOGIN AS CUSTOMER...")
@@ -22,7 +22,7 @@ if(ch==1):
                     vview()
                 if(c==2):
                     print("-------------------------------VIEW THE TOTAL NUMBER OF BOOKED FLIGHT----------------------------------")
-                    counttickets()
+                    counttickits()
                 if(c==3):
                     print("-------------------------------VIEW MEALS-------------------------------------")
                     meals()

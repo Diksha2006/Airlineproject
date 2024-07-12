@@ -7,7 +7,7 @@ tempData = []
 for i in range(len(a_id)):
     tempData.append({"a_id":a_id[i],"a_name":a_name[i],"a_type":a_type[i],"a_location":a_location[i]})
 
-def write_csv(data):
+def write_csv(tempData):
     with open('airlinedetials.csv',mode='w',newline='') as file:
         writer=csv.DictWriter(file,fieldnames=["a_id","a_name","a_type","a_location"])
         writer.writeheader()
