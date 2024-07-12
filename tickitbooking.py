@@ -41,7 +41,7 @@ def write_csv(data):
         writer.writerows(data)
 def booking():
     data=read_flight()
-    print(data)
+
     cnt=101 
     b_name=input("ENTER THE NAME=")
     b_dob=input("ENTER THE BIRTH_OF_DATE=")
@@ -760,7 +760,7 @@ def flighttype():
 
             else:
                 print("NO FLIGHTS ARE AVAILABLE FROM THE ENTERED SOURCE TO DESTINATION..\n WE WISH YOU HAD THE GOOD TIME AHEAD..")
-flighttype()
+
 
 
 

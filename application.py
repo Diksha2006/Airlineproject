@@ -21,4 +21,3 @@ def view():
     data = read_csv()
     for i in range(len(data)):
         print("Data ",data[i])
-print(view())
