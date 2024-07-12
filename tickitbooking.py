@@ -1,10 +1,132 @@
 import csv
-b_id=[]
-b_name=[]
-b_dob=[]
-passportno=[]
-b_contactno=[]
-b_email=[]
+# b_id=[]
+# b_name=[]
+# b_dob=[]
+# passportno=[]
+# b_contactno=[]
+# b_email=[]
+
+def view():
+    data=read_flight()
+    count=3
+    while(count!=0):
+        uname=input("ENTER THE USERNAME=>")
+        upass=input("ENTER THE PASSWORD=>")
+        for i in range (len(data)):
+            if(data[i]["b_email"]==uname and data[i]["b_contactno"]==upass):
+                print("TICKET DETIALS CAN BE FETCHED SUCESSFULLY...")
+                count=1
+            elif(data[i]["b_email"]!=uname and data[i]["b_contactno"]!=upass):
+                print("\n RE-ENTER THE VALLID USERNAME AND PASSWORD... ")
+            elif(data[i]["b_email"]!=uname):
+                print("AUTHENTICATION FALIURE...")
+                print("RE-ENTER THE VALLID USERNAME..")
+            elif(data[i]["b_contactno"]!=upass):
+                print("AUTHENTICATION FALIURE...")
+                print("RE-ENTER THE VALLID PASSWORD..")
+        count-=1
+        if(count!=0):
+            print("REMAINING ATTEMPTS=",count)
+            print("YOU CAN TRY AGAIN...")
+    # for i in range(len(b_id)):
+    #     print("\t",b_id[i], "\t",b_name[i],"\t",b_dob[i],"\t",passportno[i],"\t",b_contactno[i],"\t",b_email[i])
+    # with open ('flight.csv',mode='w',newline='') as file:
+        # writer=csv.writer(file)
+        # for i in range (len(b_id)):
+            # writer.writerow(("\t",b_id[i], "\t",b_name[i],"\t",b_dob[i],"\t",passportno[i],"\t",b_contactno[i],"\t",b_email[i]))
+def write_csv(data):
+    with open('flight.csv',mode='w',newline='') as file:
+        writer=csv.DictWriter(file,fieldnames=["b_id","b_name","b_dob","passportno","b_contactno","b_email"])
+        writer.writeheader()
+        writer.writerows(data)
+def booking():
+    data=read_flight()
+    print(data)
+    cnt=101 
+    b_name=input("ENTER THE NAME=")
+    b_dob=input("ENTER THE BIRTH_OF_DATE=")
+    passportno=""
+    while(len(passportno)<12):  
+        passportno=(input("ENTER THE PASSPORT_NUMBER="))
+        print("YOUR PASSPORT NUMBER IS",len(passportno))
+    b_contactno=""
+    while(len(b_contactno)<10):  
+        b_contactno=(input("ENTER THE BOOKING CONTACT_NUMBER="))
+        print("YOUR CONTACT NUMBER IS",len(b_contactno))
+    b_email=input("ENTER THE EMAIL_ID=")
+    print("BOOKING ID=>",cnt)
+    # b_id.append(cnt)
+    print("TO VIEW THE TICKET DETIALS THE USERID WILL BE YOUR ENTERED EMAIL ID AND PASSWORD WILL BE CONTACT NUMBER....")
+    c=int(input("PRESS 1 TO VEIW THE TICKIT DETIALS OR PRESS ANY DIGIT TO CONTINUE=>"))
+    if(c==1):
+        view()
+    else:
+        print("TICKIT BOOKED SUCCESSFULLY....")
+    c=cnt+1
+    
+    newData = {"b_id":cnt, "b_name":b_name,"b_dob":b_dob,"passportno":passportno,"b_contactno":b_contactno,"b_email":b_email} 
+    data.append(newData)
+    write_csv(data)
+
+
+
+
+def search(a_id,a_name,a_type,a_location):
+    print("_______________SEARCH RECORDS_________________ ")
+    t1=input("ENTER THE FLIGHT TO BE SEARCH:-")
+    
+    for i in range (len(a_id)):
+        if(t1==a_id):
+            print("\t",a_id[i],"\t",a_name[i],"\t",a_type[i],"\t",a_location[i])
+
+def search1(b_id,b_name,b_dob,passportno,b_contactno,b_email):
+    print("_______________SEARCH RECORDS_________________ ")
+    t2=input("ENTER THE TICIT BOOKING TO BE SEARCH:-")
+    for i in range (len(b_id)):
+        if(t2==b_id):
+           print ("\t",b_id[i], "\t",b_name[i],"\t",b_dob[i],"\t",passportno[i],"\t",b_contactno[i],"\t",b_email[i])
+
+def deletedata(b_id,b_name,b_dob,passportno,b_contactno,b_email):
+    b_id=input("ENTER THE BOOKING ID FOR THE RECORD TO BE DELETED=>")
+    data=read_flight()
+    data=[flight for flight in data if flight['b_id']!=b_id]
+    write_csv(data)
+    
+def updatedata(b_id,b_name=None,b_dob=None,passportno=None,b_contactno=None,b_email=None):
+    print("CLICK ON 1-4 OPTION WHICH ARE TO BE UPDATED....")
+    print("1.UPADTE BOOKING ID \n 2.UPDATE B_NMAE \n 3.UPDATE B_DOB \n 4.UPDATE PASSPORTNO \n 5.B_CONTACTNO \n 6.B_EMAIL")
+    ch=int(input("ENTER YOUR CHOICE=>"))
+    findr=input("ENTER THE BOOKING ID TO BE FOUND=>")
+    for i in range (len(b_id)):
+       if(b_id[i]==findr):
+           if(ch==1):
+               id=input("ENTER THE TIKET ID TO BE UPDATED=>")
+               b_id[i]=id
+           elif(ch==2):
+               n=input("ENTER THE NAME TO BE UPDATED=>")
+               b_name[i]=n
+           elif(ch==3):
+               d=input("ENTER THE DOB TO BE UPDATED=>")
+               b_dob[i]=d
+           elif(ch==4):
+               pno=input("ENTER THE PASSPORT NO TO BE UPDATED=>")
+               passportno[i]=pno
+           elif(ch==5):
+               cno=input("ENTER THE DUEDATE TO BE UPDATED=>")
+               b_contactno[i]=cno
+           elif(ch==6):
+               e=input("ENTER THE EMAIL TO BE UPDATED=>")
+               b_email[i]=e
+
+def read_flight():
+    with open('flight.csv', mode='r', newline='') as file:
+        reader = csv.DictReader(file)
+        return list(reader)
+
+
+  
+
+
 def flighttype():
     print("\n 1. DOMESTIC FLIGHT \n 2. INTERNATIONAL FLIGHT")
     ch=int(input("ENTER YOUR CHOICE=>"))
@@ -638,130 +760,8 @@ def flighttype():
 
             else:
                 print("NO FLIGHTS ARE AVAILABLE FROM THE ENTERED SOURCE TO DESTINATION..\n WE WISH YOU HAD THE GOOD TIME AHEAD..")
-        
-
-
-def booking():
-    cnt=101 
-    n=input("ENTER THE NAME=")
-    b_name.append(n)
-    d=input("ENTER THE BIRTH_OF_DATE=")
-    b_dob.append(d)
-    p=(input("ENTER THE PASSPORT_NUMBER="))
-    if(len(p)<=12):
-        if(len(p)==12):
-          passportno.append(p)
-        else:
-          print("ENTER THE VALLID PASSPORT NUMBER (CONSISTS WITH 12 DIGITS....)")
-    c=(input("ENTER THE BOOKING CONTACT_NUMBER="))
-    if(len(c)<=10):
-
-        if(len(c)==10):
-             b_contactno.append(c)
-        else:
-             print("ENTER THE VALLID CONTACT NUMBER (CONSISTS WITH 10 DIGITS....)")
-
-    e=input("ENTER THE EMAIL_ID=")
-    b_email.append(e) 
-    print("BOOKING ID=>",cnt)
-    b_id.append(cnt)
-    print("TO VIEW THE TICKET DETIALS THE USERID WILL BE YOUR ENTERED EMAIL ID AND PASSWORD WILL BE CONTACT NUMBER....")
-    c=int(input("PRESS 1 TO VEIW THE TICKIT DETIALS OR PRESS ANY DIGIT TO CONTINUE=>"))
-    if(c==1):
-        view()
-    else:
-        print("TICKIT BOOKED SUCCESSFULLY....")
-    c=cnt+1
-    with open ('bookflight.csv',mode='w',newline='') as file:
-        writer=csv.writer(file)
-        for i in range (len(b_id)):
-            writer.writerow(("\t",b_id[i], "\t",b_name[i],"\t",b_dob[i],"\t",passportno[i],"\t",b_contactno[i],"\t",b_email[i]))
-def view():
-    #count=3
-    #cnt=0
-    #while(count!=0):
-        #uname=input("ENTER THE USERNAME=>")
-        #upass=input("ENTER THE PASSWORD=>")
-        #if(uname==b_email[cnt] and upass==b_contactno[cnt]):
-            #print("TICKET DETIALS CAN BE FETCHED SUCESSFULLY...")
-            #count=1
-        #elif(uname!=b_email[cnt] and upass!=b_contactno[cnt]):
-            #print("\n RE-ENTER THE VALLID USERNAME AND PASSWORD... ")
-        #elif(uname!=b_email[cnt]):
-            #print("AUTHENTICATION FALIURE...")
-           # print("RE-ENTER THE VALLID USERNAME..")
-        #elif(upass!=b_contactno[cnt]):
-            #print("AUTHENTICATION FALIURE...")
-            #print("RE-ENTER THE VALLID PASSWORD..")
-        #count-=1
-        #if(count!=0):
-            #print("REMAINING ATTEMPTS=",count)
-            #print("YOU CAN TRY AGAIN...")
-    #cnt+=1
-    for i in range(len(b_id)):
-        print("\t",b_id[i], "\t",b_name[i],"\t",b_dob[i],"\t",passportno[i],"\t",b_contactno[i],"\t",b_email[i])
 flighttype()
 
-def search(a_id,a_name,a_type,a_location):
-    print("_______________SEARCH RECORDS_________________ ")
-    t1=input("ENTER THE FLIGHT TO BE SEARCH:-")
-    
-    for i in range (len(a_id)):
-        if(t1==a_id):
-            print("\t",a_id[i],"\t",a_name[i],"\t",a_type[i],"\t",a_location[i])
 
-def search1(b_id,b_name,b_dob,passportno,b_contactno,b_email):
-    print("_______________SEARCH RECORDS_________________ ")
-    t2=input("ENTER THE TICIT BOOKING TO BE SEARCH:-")
-    for i in range (len(b_id)):
-        if(t2==b_id):
-           print ("\t",b_id[i], "\t",b_name[i],"\t",b_dob[i],"\t",passportno[i],"\t",b_contactno[i],"\t",b_email[i])
 
-def deletedata(b_id,b_name,b_dob,passportno,b_contactno,b_email):
-    dele=input("ENTER THE BOOKING ID FOR THE RECORD TO BE DELETED=>")
-    for i in range (len(b_id)):
-       if(b_id[i]==dele):
-          b_id.remove(b_id[i])
-          b_name.remove(b_name[i])
-          b_dob.remove(b_dob[i])
-          passportno.remove(passportno[i])
-          b_contactno.remove(b_contactno[i])
-          b_email.remove(b_email[i])
-          break  
 
-    with open('bookflight.csv', mode='w', newline='') as file:
-        writer = csv.writer(file)
-        for i in range(len(b_id)):
-            writer.writerow(("\t",b_id[i], "\t",b_name[i],"\t",b_dob[i],"\t",passportno[i],"\t",b_contactno[i],"\t",b_email[i]))
-           
-
-def updatedata(b_id,b_name=None,b_dob=None,passportno=None,b_contactno=None,b_email=None):
-    print("CLICK ON 1-4 OPTION WHICH ARE TO BE UPDATED....")
-    print("1.UPADTE BOOKING ID \n 2.UPDATE B_NMAE \n 3.UPDATE B_DOB \n 4.UPDATE PASSPORTNO \n 5.B_CONTACTNO \n 6.B_EMAIL")
-    ch=int(input("ENTER YOUR CHOICE=>"))
-    findr=input("ENTER THE BOOKING ID TO BE FOUND=>")
-    for i in range (len(b_id)):
-       if(b_id[i]==findr):
-           if(ch==1):
-               id=input("ENTER THE TIKET ID TO BE UPDATED=>")
-               b_id[i]=id
-           elif(ch==2):
-               n=input("ENTER THE NAME TO BE UPDATED=>")
-               b_name[i]=n
-           elif(ch==3):
-               d=input("ENTER THE DOB TO BE UPDATED=>")
-               b_dob[i]=d
-           elif(ch==4):
-               pno=input("ENTER THE PASSPORT NO TO BE UPDATED=>")
-               passportno[i]=pno
-           elif(ch==5):
-               cno=input("ENTER THE DUEDATE TO BE UPDATED=>")
-               b_contactno[i]=cno
-           elif(ch==6):
-               e=input("ENTER THE EMAIL TO BE UPDATED=>")
-               b_email[i]=e
-
-    with open('bookflight.csv', mode='w', newline='') as file:
-        writer = csv.writer(file)
-        for i in range(len(b_id)):
-            writer.writerow(("\t", b_id[i],   "\t"  ,b_name[i],   "\t"  ,b_dob[i],   "\t"  ,passportno[i],   "\t"  ,b_contactno[i], "\t"  ,b_email[i]))
