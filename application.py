@@ -11,13 +11,13 @@ def write_csv(data):
     with open('airlinedetials.csv',mode='w',newline='') as file:
         writer=csv.DictWriter(file,fieldnames=["a_id","a_name","a_type","a_location"])
         writer.writeheader()
-        writer.writerows(data)
+        writer.writerows(tempData)
 
-def read_csv():
-    with open("flight.csv",mode="r",newline="") as file:
-        red=csv.DictReader(file,fieldnames=["b_id","b_name","b_dob","passportno","b_contactno","b_email"])
+def reader_csv():
+    with open(".csv",mode="r",newline="") as file:
+        red=csv.DictReader(file)
         return list(red)
-def view():
-    data = read_csv()
-    for i in range(len(data)):
-        print("Data ",data[i])
+def vview():
+    tempData = reader_csv()
+    for i in range(len(tempData)):
+        print("Data ",tempData[i])

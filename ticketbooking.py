@@ -1,10 +1,4 @@
 import csv
-# b_id=[]
-# b_name=[]
-# b_dob=[]
-# passportno=[]
-# b_contactno=[]
-# b_email=[]
 
 def view():
     data=read_flight()
@@ -28,8 +22,8 @@ def view():
         if(count!=0):
             print("REMAINING ATTEMPTS=",count)
             print("YOU CAN TRY AGAIN...")
-    # for i in range(len(b_id)):
-    #     print("\t",b_id[i], "\t",b_name[i],"\t",b_dob[i],"\t",passportno[i],"\t",b_contactno[i],"\t",b_email[i])
+    for i in range(len("b_id")):
+      print("\t","b_id", "\t","b_name","\t","b_dob","\t","passportno","\t","b_contactno","\t","b_email")
     # with open ('flight.csv',mode='w',newline='') as file:
         # writer=csv.writer(file)
         # for i in range (len(b_id)):
@@ -39,9 +33,9 @@ def write_csv(data):
         writer=csv.DictWriter(file,fieldnames=["b_id","b_name","b_dob","passportno","b_contactno","b_email"])
         writer.writeheader()
         writer.writerows(data)
+
 def booking():
     data=read_flight()
-
     cnt=101 
     b_name=input("ENTER THE NAME=")
     b_dob=input("ENTER THE BIRTH_OF_DATE=")
@@ -68,7 +62,11 @@ def booking():
     data.append(newData)
     write_csv(data)
 
-
+c=0
+def counttickits():
+    for i in range(len('flight.csv')):
+        c=c+1
+    print("THE TOTAL NUMBER OF BOOKED FLIGHTS ARE=>",c)
 
 
 def search(a_id,a_name,a_type,a_location):
@@ -760,8 +758,3 @@ def flighttype():
 
             else:
                 print("NO FLIGHTS ARE AVAILABLE FROM THE ENTERED SOURCE TO DESTINATION..\n WE WISH YOU HAD THE GOOD TIME AHEAD..")
-
-
-
-
-
