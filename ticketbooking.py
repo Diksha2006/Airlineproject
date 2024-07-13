@@ -64,8 +64,8 @@ def booking():
 
 c=0
 def counttickits():
-    for i in range(len('flight.csv')):
-        c=c+1
+    c=len('flight.csv')
+        
     print("THE TOTAL NUMBER OF BOOKED FLIGHTS ARE=>",c)
 
 
