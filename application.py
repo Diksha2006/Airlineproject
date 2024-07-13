@@ -14,7 +14,7 @@ def write_csv(tempData):
         writer.writerows(tempData)
 
 def reader_csv():
-    with open(".csv",mode="r",newline="") as file:
+    with open("airlinedetails.csv",mode="r",newline="") as file:
         red=csv.DictReader(file)
         return list(red)
 def vview():
